@@ -34,7 +34,8 @@ pipeline {
             steps {
                 sh 'mvn clean package'
                 sh 'docker build -t pos-outer-edge .'
-                sh 'docker run --network="host" -d -p8085:8085 pos-outer-edge'
+                sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
+                sh 'docker push networkninjadh/pos-outer-edge:latest'
             }
         }
 
